@@ -1,14 +1,16 @@
 promtail:
-  scrape_configs:
-    - job_name: gcplog
-      gcplog:
-        project_id: "psychic-sensor-230117"
-        subscription: "psychic-sensor-230117-promtail-subscription"
-        use_incoming_timestamp: false # default rewrite timestamps.
-        labels:
-          job: "gcplog"
-      relabel_configs:
-        - source_labels: ["__gcp_resource_type"]
-          target_label: "resource_type"
-        - source_labels: ["__gcp_resource_labels_project_id"]
-          target_label: "project"
+  config:
+    snippets:
+      extraScrapeConfigs: |
+        - job_name: gcplog
+          gcplog:
+            project_id: "psychic-sensor-230117"
+            subscription: "psychic-sensor-230117-promtail-subscription"
+            use_incoming_timestamp: false # default rewrite timestamps.
+            labels:
+              job: "gcplog"
+          relabel_configs:
+            - source_labels: ["__gcp_resource_type"]
+              target_label: "resource_type"
+            - source_labels: ["__gcp_resource_labels_project_id"]
+              target_label: "project"
