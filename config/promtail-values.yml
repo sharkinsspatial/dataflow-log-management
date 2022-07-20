@@ -1,11 +1,14 @@
 promtail:
+  serviceAccount:
+    create: false
+    name: "loki-promtail"
   config:
     snippets:
       extraScrapeConfigs: |
         - job_name: gcplog
           gcplog:
             project_id: "psychic-sensor-230117"
-            subscription: "psychic-sensor-230117-promtail-subscription"
+            subscription: "psychic-sensor-230117-log-subscription"
             use_incoming_timestamp: false # default rewrite timestamps.
             labels:
               job: "gcplog"

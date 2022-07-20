@@ -1,5 +1,5 @@
 resource "google_pubsub_subscription" "subscription" {
-  name  = "${var.project}-promtail-subscription"
+  name  = "${var.project}-log-subscription"
   topic = resource.google_pubsub_topic.topic.id
 
   message_retention_duration = "1200s"

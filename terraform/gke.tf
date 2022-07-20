@@ -10,6 +10,9 @@ resource "google_container_cluster" "primary" {
 
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
+  workload_identity_config {
+    workload_pool = "${var.project}.svc.id.goog"
+  }
 }
 
 resource "google_container_node_pool" "primary_nodes" {
@@ -36,3 +39,4 @@ resource "google_container_node_pool" "primary_nodes" {
     }
   }
 }
+
